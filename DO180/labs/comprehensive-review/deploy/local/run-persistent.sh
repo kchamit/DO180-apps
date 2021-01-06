@@ -6,4 +6,4 @@ if [ ! -d /tmp/docker/work ]; then
   sudo chown 1001:1001 /tmp/docker/work
 fi
 
-sudo podman run -d -v /tmp/docker/work:/opt/nexus/sonatype-work nexus
+sudo docker run -d -v /tmp/docker/work:/opt/nexus/sonatype-work nexus

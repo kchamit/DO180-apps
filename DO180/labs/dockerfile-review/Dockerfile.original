@@ -1,10 +1,10 @@
-FROM registry.access.redhat.com/ubi7/ubi:7.7
+FROM <base image>
 
-MAINTAINER amitkch <amitkch@example.com>
+MAINTAINER username <username@example.com>
 
-ENV PORT 8080
+ENV PORT <port>
 
-RUN yum install -y httpd && yum clean all
+RUN <provide yum commands in a single line>
 
 RUN sed -ri -e "/^Listen 80/c\Listen ${PORT}" /etc/httpd/conf/httpd.conf && \
     chown -R apache:apache /etc/httpd/logs/ && \
@@ -13,8 +13,7 @@ RUN sed -ri -e "/^Listen 80/c\Listen ${PORT}" /etc/httpd/conf/httpd.conf && \
 USER apache
 
 # Expose the custom port that you provided in the ENV var
-EXPOSE ${PORT}
+
 # Copy all files under src/ folder to Apache DocumentRoot (/var/www/html) 
-COPY src/ /var/www/html/
+
 # Start Apache in the foreground
-CMD ["httpd", "-D", "FOREGROUND"]
